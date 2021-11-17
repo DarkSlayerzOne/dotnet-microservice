@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+    mssql:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        ports:
+            - 1401:1433
+        environment: 
+        - SA_PASSWORD=chuck_chuck_10
+        - ACCEPT_EULA=Y
+        volumes:
+        - ./data:/scripts/
+        command:
+        - /bin/bash
+        - -c 
+        - |
+            /opt/mssql/bin/sqlservr &
+            sleep 30
+            for foo in /scripts/*.sql
+            do /opt/mssql-tools/bin/sqlcmd -U sa -P $$SA_PASSWORD -l 30 -e -i $$foo
+            done
+            sleep infinity
