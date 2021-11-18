@@ -42,8 +42,8 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Chuck
-        path: ${{ github.workspace }}/Chuck.API/bin/Debug/netcoreapp5.0/publish/
-
+        path: ${{ github.workspace }}/Chuck.API/bin/Debug/net5.0/publish
+        
   # push:
 
   #   runs-on: ubuntu-latest
