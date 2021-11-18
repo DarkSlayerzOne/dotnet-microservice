@@ -36,14 +36,16 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     
     - name: Publish
-      run: dotnet publish
+      run: dotnet publish -c Release -o Chuck
 
     - name: Upload Build Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: Chuck
-        path: ${{ github.workspace }}/Chuck.API/bin/Debug/net5.0/publish
-        
+        name: Chuck-Artifacts
+        path: Chuck/**
+        if-no-files-found: error
+        retention-days: 7
+
   # push:
 
   #   runs-on: ubuntu-latest
