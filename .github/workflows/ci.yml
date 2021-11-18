@@ -46,8 +46,24 @@ jobs:
         if-no-files-found: error
         retention-days: 7
 
-  docker_build_and_push:
+
+  
+  lint_my_code:
     needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Super-Linter
+      uses: github/super-linter@v3.15.5
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN_CHUCK }}
+        DISABLE_ERRORS: true
+        OUTPUT_FOLDER: CodeReports
+
+
+  docker_build_and_push:
+    needs: lint_my_code
     runs-on: ubuntu-latest
 
     steps:
@@ -60,3 +76,4 @@ jobs:
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+  
