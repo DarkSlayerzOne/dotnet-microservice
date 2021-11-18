@@ -34,6 +34,15 @@ jobs:
 
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    
+    - name: Publish
+      run: dotnet publish
+
+    - name: Upload Build Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Chuck
+        path: ${{ github.workspace }}/Chuck.API/bin/Debug/netcoreapp5.0/publish/
 
   # push:
 
