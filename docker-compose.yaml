@@ -1,12 +1,14 @@
-version: "3.9"
+version: '3.9'
 services:
     mssql:
         image: mcr.microsoft.com/mssql/server:2019-latest
         ports:
             - 1401:1433
         environment: 
-        - SA_PASSWORD=chuck_chuck_10
+        - SA_PASSWORD=
         - ACCEPT_EULA=Y
+        networks:
+            - chuck-network
         volumes:
         - ./data:/scripts/
         command:
@@ -19,3 +21,8 @@ services:
             do /opt/mssql-tools/bin/sqlcmd -U sa -P $$SA_PASSWORD -l 30 -e -i $$foo
             done
             sleep infinity
+
+
+networks:
+    chuck-network:
+      name : chuck-networks

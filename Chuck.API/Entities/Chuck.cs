@@ -1,8 +1,5 @@
 using System;
 
-
-
-
 namespace Chuck.API.Entities
 {
 
